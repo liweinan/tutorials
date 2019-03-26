@@ -14,12 +14,13 @@ public class MulticastLiveTest {
     public void whenBroadcasting_thenDiscoverExpectedServers() throws Exception {
         int expectedServers = 4;
         initializeForExpectedServers(expectedServers);
-
+        System.setProperty("java.net.preferIPv4Stack" , "true");
         int serversDiscovered = client.discoverServers("hello server");
         assertEquals(expectedServers, serversDiscovered);
     }
 
     private void initializeForExpectedServers(int expectedServers) throws Exception {
+        System.setProperty("java.net.preferIPv4Stack" , "true");
         for (int i = 0; i < expectedServers; i++) {
             new MulticastEchoServer().start();
         }

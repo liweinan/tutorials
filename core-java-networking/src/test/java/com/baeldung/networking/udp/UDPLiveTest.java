@@ -14,6 +14,7 @@ public class UDPLiveTest {
 
     @Before
     public void setup() throws IOException {
+        System.setProperty("java.net.preferIPv4Stack" , "true");
         new EchoServer().start();
         client = new EchoClient();
     }

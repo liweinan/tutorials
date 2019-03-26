@@ -24,6 +24,11 @@ public class EchoServer extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 InetAddress address = packet.getAddress();
+
+                System.out.println("<><><><><><><><><><>");
+                System.out.println(address.toString());
+                System.out.println("<><><><><><><><><><>");
+
                 int port = packet.getPort();
                 packet = new DatagramPacket(buf, buf.length, address, port);
                 String received = new String(packet.getData(), 0, packet.getLength());
@@ -38,5 +43,11 @@ public class EchoServer extends Thread {
             }
         }
         socket.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        (new EchoServer()).start();
+        EchoClient client = new EchoClient();
+        client.sendEcho("Hello");
     }
 }

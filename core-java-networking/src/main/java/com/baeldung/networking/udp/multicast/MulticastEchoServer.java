@@ -14,7 +14,7 @@ public class MulticastEchoServer extends Thread {
     public MulticastEchoServer() throws IOException {
         socket = new MulticastSocket(4446);
         socket.setReuseAddress(true);
-        group = InetAddress.getByName("230.0.0.0");
+        group = InetAddress.getByName("230.0.0.1");
         socket.joinGroup(group);
     }
 
@@ -37,5 +37,10 @@ public class MulticastEchoServer extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.setProperty("java.net.preferIPv4Stack" , "true");
+        (new MulticastEchoServer()).start();
     }
 }
